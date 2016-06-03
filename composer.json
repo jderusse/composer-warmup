@@ -1,0 +1,17 @@
+{
+  "name": "jderusse/composer-warmup",
+  "type": "composer-plugin",
+  "require": {
+    "php": ">=7.0",
+    "composer-plugin-api": "^1.0",
+    "ext-Zend-OPcache": "*"
+  },
+  "extra": {
+    "class": "Jderusse\\Warmup\\Plugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jderusse\\Warmup\\": "src"
+    }
+  }
+}
