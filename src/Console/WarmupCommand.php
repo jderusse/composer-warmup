@@ -3,12 +3,13 @@
 namespace Jderusse\Warmup\Console;
 
 use Composer\Command\BaseCommand;
-use Jderusse\Warmup\Classmap\ClassmapReader;
+use Jderusse\Warmup\ClassmapReader\ChainReader;
+use Jderusse\Warmup\ClassmapReader\DirectoryReader;
+use Jderusse\Warmup\ClassmapReader\OptimizedReader;
+use Jderusse\Warmup\Compiler\PhpServerCompiler;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\PhpExecutableFinder;
-use Symfony\Component\Process\ProcessBuilder;
 
 class WarmupCommand extends BaseCommand
 {
@@ -46,39 +47,28 @@ class WarmupCommand extends BaseCommand
         }
 
         $composer = $this->getComposer();
-        $localRepo = $composer->getRepositoryManager()->getLocalRepository();
 
-        $generator = $composer->getAutoloadGenerator();
-        $generator->setDevMode(true);
-
-        $reader = new ClassmapReader(
-            $composer->getInstallationManager(),
-            $generator,
-            $composer->getConfig()
+        $reader = new ChainReader(
+            array_merge(
+                [new OptimizedReader($composer->getConfig())],
+                array_map(
+                    function ($extra) {
+                        return new DirectoryReader($extra);
+                    },
+                    $input->getArgument('extra')
+                )
+            )
         );
-
-        $files = $reader->getFilesByPackage(
-            $composer->getPackage(),
-            $localRepo->getCanonicalPackages(),
-            $input->getArgument('extra')
-        );
-        $phpFinder = new PhpExecutableFinder();
-        $phpPath = $phpFinder->find();
-        foreach ($files as $file) {
-            $process = ProcessBuilder::create([$phpPath, '-l', $file])->getProcess();
-            if (0 == $process->run()) {
+        $compiler = new PhpServerCompiler();
+        foreach ($reader->getClassmap() as $file) {
+            try {
+                $compiler->compile($file);
                 if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
                     $output->writeln(sprintf('<info>Compiled file <comment>%s</comment></info>', $file));
                 }
-                continue;
+            } catch (\Throwable $e) {
+                $output->writeln(sprintf('<error>Failed to compile file <comment>%s</comment></error>', $file));
             }
-            $output->writeln(
-                sprintf(
-                    '<error>Failed to compile file <comment>%s</comment> : <info>%s</info></error>',
-                    $file,
-                    $process->getOutput().' '.$process->getErrorOutput()
-                )
-            );
         }
     }
 }
