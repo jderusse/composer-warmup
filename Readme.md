@@ -1,6 +1,6 @@
 # OpCode Warmer (composer plugin)
 
-Optimize your application by warmuping OpCode.
+Optimize your application by warming up OpCode.
 
 ## Requirements
 
