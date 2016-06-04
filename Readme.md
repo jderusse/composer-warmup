@@ -1,6 +1,6 @@
 # OpCode Warmer (composer plugin)
 
-Optimize your application by warmuping OpCode.
+Optimize your application by warming up OpCode.
 
 ## Requirements
 
@@ -22,7 +22,7 @@ zend_extension=opcache.so
 opcache.enable_cli=1
 opcache.file_cache='/tmp/opcache'
 
-; recommanded
+; recommended
 opcache.file_update_protection=0
 opcache.validate_timestamps=0
 ```
