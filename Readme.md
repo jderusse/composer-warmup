@@ -34,7 +34,7 @@ $ cd my-project
 $ composer warmup-opcode
 ```
 
-## How does it work ?
+## How does it work?
 
 Since PHP 7.0, the OpCache extension is able to store the compiled OpCode into
 files.
@@ -43,6 +43,6 @@ This plugin add the `warmup-opcode` command to
 [composer](https://getcomposer.org/) which triggers the compilation for every
 PHP file discovered in the project.
 
-When you start the application for the first time, PHP don't need to compile
+When you start the application for the first time, PHP doesn't need to compile
 the files which improve performances, as you can see in this [blackfire
 comparison](https://blackfire.io/profiles/compare/a5e55813-de07-437c-9ddf-e8aefc6a8a81/graph).
