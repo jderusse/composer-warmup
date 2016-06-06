@@ -24,7 +24,6 @@ opcache.file_cache='/tmp/opcache'
 
 ; recommended
 opcache.file_update_protection=0
-opcache.validate_timestamps=0
 ```
 
 ## Usage
