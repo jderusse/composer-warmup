@@ -9,7 +9,7 @@ use Composer\Util\Filesystem;
 
 class DirectoryReader implements ReaderInterface
 {
-    /** @var array */
+    /** @var string */
     private $directory;
     /** @var Filesystem */
     private $filesystem;
