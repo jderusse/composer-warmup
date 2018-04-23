@@ -28,12 +28,12 @@ class WarmupCommand extends BaseCommand
         }
 
         if (!(bool) ini_get('opcache.enable_cli')) {
-            throw new \RuntimeException('You have to enable the opcache extension');
+            throw new \RuntimeException('You have to enable the opcache extension for usage in the CLI using: opcache.enable_cli');
         }
 
         $opcacheDir = ini_get('opcache.file_cache');
         if (empty($opcacheDir)) {
-            throw new \RuntimeException('You have to define a file_cache to use');
+            throw new \RuntimeException('You have to define a file_cache to use in using: opcache.file_cache');
         }
 
         if (!is_dir($opcacheDir)) {
