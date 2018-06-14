@@ -4,7 +4,8 @@
   "require": {
     "php": ">=7.0",
     "composer-plugin-api": "^1.0",
-    "ext-Zend-OPcache": "*"
+    "ext-Zend-OPcache": "*",
+    "ext-sockets": "*"
   },
   "extra": {
     "class": "Jderusse\\Warmup\\Plugin"
