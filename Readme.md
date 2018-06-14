@@ -43,5 +43,4 @@ This plugin adds the `warmup-opcode` command to
 PHP file discovered in the project.
 
 When you start the application for the first time, PHP doesn't need to compile
-the files, which improve performance, as you can see in this [blackfire
-comparison](https://blackfire.io/profiles/compare/a5e55813-de07-437c-9ddf-e8aefc6a8a81/graph).
+the files, which improve performance.
