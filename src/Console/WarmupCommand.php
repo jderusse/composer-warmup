@@ -59,7 +59,9 @@ class WarmupCommand extends BaseCommand
                 )
             )
         );
+
         $compiler = new PhpServerCompiler();
+
         foreach ($reader->getClassmap() as $file) {
             try {
                 $compiler->compile($file);
