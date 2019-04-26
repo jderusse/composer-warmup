@@ -6,7 +6,6 @@ Optimize your application by warming up OpCode.
 
 - PHP `>=7.0`
 - Zend extension [Opcache](http://php.net/manual/en/book.opcache.php)
-- extension [Sockets](http://php.net/manual/en/book.sockets.php)
 - composer `>=1.0.0`
 
 ## Install
