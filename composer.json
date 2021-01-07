@@ -2,7 +2,7 @@
   "name": "jderusse/composer-warmup",
   "type": "composer-plugin",
   "require": {
-    "php": "^7.0",
+    "php": "^7.0 || ^8.0.0",
     "composer-plugin-api": "^1.0 || ^2.0",
     "ext-Zend-OPcache": "*",
     "ext-sockets": "*"
